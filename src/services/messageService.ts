@@ -1,5 +1,5 @@
 import { connectionDataBase } from "../prisma"
-
+import { socket } from '../app'
 
 export class MessageService {
     async execute(text:string,user_id:string){
@@ -11,6 +11,18 @@ export class MessageService {
                 user: true
             }
         })
+        
+        const menssageInfos = {
+            user_id: message.user_id,
+            text: message.text,
+            created_at: message.created_at,
+            user: {
+                name: message.user.name,
+                avatar_url: message.user.avatar_url
+            }
+        }
+
+        socket.emit('new_message',menssageInfos)
 
         return message
 
