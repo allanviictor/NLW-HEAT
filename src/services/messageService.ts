@@ -16,6 +16,7 @@ export class MessageService {
             user_id: message.user_id,
             text: message.text,
             created_at: message.created_at,
+            id: message.id,
             user: {
                 name: message.user.name,
                 avatar_url: message.user.avatar_url
